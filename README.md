@@ -16,7 +16,7 @@ python -m venv venv
 ```bash
 git clone https://github.com/LYAKAKOY/sbercom_center_parser.git
 ```
-4. Перейти в папку sbercom_center_parser
+5. Перейти в папку sbercom_center_parser
 ```bash
 cd sbercom_center_parser
 ```
