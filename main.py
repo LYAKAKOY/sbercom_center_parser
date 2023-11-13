@@ -202,18 +202,18 @@ try:
 
             elections: Dict[int, str] = {}
             number = 1
-            print("-" * 1000)
+            print("-" * 100)
             for item in list_group_item:
                 child_elements = item.find_all(True)
                 if not child_elements:
                     print(item.text)
-                    print("-" * 1000)
+                    print("-" * 100)
                     continue
                 span_element = item.find("span")
 
                 if span_element:
                     print(span_element.text)
-                    print("-" * 1000)
+                    print("-" * 100)
                 child_div = item.find("div")
 
                 if child_div:
@@ -227,7 +227,7 @@ try:
                             " | ",
                             nested_divs[1].text,
                         )
-                        print("-" * 1000)
+                        print("-" * 100)
                         link = nested_divs[1].find("a", href=True)["href"]
                         elections.setdefault(number, link)
                 number += 1
@@ -301,7 +301,6 @@ try:
                     options = []
                 print("*", selected_item.text)
                 print(0, ":", "Записать данные по данному пункту")
-                print(-1, ":", "Вывести данные")
                 if choices.get(1) is not None:
                     print(1, ":", choices.get(1).text)
                 else:
@@ -312,8 +311,6 @@ try:
                     )
                     print(number, ":", option.text)
                 choice = int(input("Выберите пункт: "))
-                if choice == -1:
-                    parse_table("", driver.page_source, choice_input, 0)
                 if choice == 0:
                     name_file = input("Введите название для файла: ")
                     parse_table(name_file, driver.page_source, choice_input)
