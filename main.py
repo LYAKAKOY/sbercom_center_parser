@@ -13,7 +13,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-TIME_WAIT = 10
+TIME_WAIT = 5
 TIME_WAIT_CAPTCHA = 60
 
 def parse_table(
