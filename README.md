@@ -24,7 +24,7 @@ cd sbercom_center_parser
 ```bash
 pip install -r requirements.txt
 ```
-7 Запуск программы
+7. Запуск программы
 ```bash
 python main.py
 ```
