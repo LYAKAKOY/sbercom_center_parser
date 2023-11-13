@@ -68,13 +68,19 @@ try:
     driver.get(url)
 
     wait = WebDriverWait(driver, TIME_WAIT)
-    wait.until(EC.presence_of_element_located((By.CLASS_NAME, "menu_item_li")))
+    try:
+        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "menu_item_li")))
+    except TimeoutException:
+        print("Решите капчу")
 
     menu_items = driver.find_elements(By.CLASS_NAME, "menu_item_li")
     menu_items[2].click()
 
     wait = WebDriverWait(driver, TIME_WAIT)
-    wait.until(EC.presence_of_element_located((By.CLASS_NAME, "popup_menu_item")))
+    try:
+        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "popup_menu_item")))
+    except TimeoutException:
+        print("Решите капчу")
 
     regions = driver.find_element(By.TAG_NAME, "select").find_elements(
         By.TAG_NAME, "option"
@@ -91,13 +97,21 @@ try:
     driver.get(region_site_url)
 
     wait = WebDriverWait(driver, TIME_WAIT)
-    wait.until(EC.presence_of_element_located((By.ID, "horizontal-multilevel-menu")))
+    try:
+        wait.until(
+            EC.presence_of_element_located((By.ID, "horizontal-multilevel-menu"))
+        )
+    except TimeoutException:
+        print("Решите капчу")
 
     menu_items = driver.find_elements(By.TAG_NAME, "li")
     menu_items[1].click()
 
     wait = WebDriverWait(driver, TIME_WAIT)
-    wait.until(EC.presence_of_element_located((By.CLASS_NAME, "border")))
+    try:
+        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "border")))
+    except TimeoutException:
+        print("Решите капчу")
 
     left_blocks = driver.find_elements(By.CLASS_NAME, "border")
     for block in left_blocks:
@@ -106,8 +120,8 @@ try:
             calendar_elections_url = link.get_property("href")
             driver.get(calendar_elections_url)
 
+            wait = WebDriverWait(driver, TIME_WAIT)
             try:
-                wait = WebDriverWait(driver, TIME_WAIT)
                 wait.until(EC.presence_of_element_located((By.ID, "close_filters")))
             except TimeoutException:
                 print("Решите капчу")
@@ -116,7 +130,10 @@ try:
             show_filter.click()
 
             wait = WebDriverWait(driver, TIME_WAIT)
-            wait.until(EC.presence_of_element_located((By.ID, "start_date")))
+            try:
+                wait.until(EC.presence_of_element_located((By.ID, "start_date")))
+            except TimeoutException:
+                print("Решите капчу")
 
             start_date = input("Введите начальную дату: ")
             input_start_date = driver.find_element(By.ID, "start_date")
@@ -152,8 +169,8 @@ try:
             button_search = driver.find_element(By.ID, "calendar-btn-search")
             button_search.click()
 
+            wait = WebDriverWait(driver, TIME_WAIT)
             try:
-                wait = WebDriverWait(driver, TIME_WAIT)
                 wait.until(
                     EC.presence_of_element_located((By.CLASS_NAME, "list-group-item"))
                 )
@@ -201,17 +218,25 @@ try:
             driver.get(elections[input_election])
 
             wait = WebDriverWait(driver, TIME_WAIT)
-            wait.until(EC.presence_of_element_located((By.ID, "election-results-name")))
+            try:
+                wait.until(
+                    EC.presence_of_element_located((By.ID, "election-results-name"))
+                )
+            except TimeoutException:
+                print("Решите капчу")
 
             election_results = driver.find_element(By.ID, "election-results-name")
             election_results.click()
 
             wait = WebDriverWait(driver, TIME_WAIT)
-            wait.until(
-                EC.presence_of_element_located(
-                    (By.CSS_SELECTOR, ".nav-link.active.show")
+            try:
+                wait.until(
+                    EC.presence_of_element_located(
+                        (By.CSS_SELECTOR, ".nav-link.active.show")
+                    )
                 )
-            )
+            except TimeoutException:
+                print("Решите капчу")
 
             content = BeautifulSoup(driver.page_source, "html.parser")
             all_tbody = content.find_all("tbody")
@@ -227,8 +252,8 @@ try:
 
             driver.get(choices[choice_input])
 
+            wait = WebDriverWait(driver, TIME_WAIT)
             try:
-                wait = WebDriverWait(driver, TIME_WAIT)
                 wait.until(EC.presence_of_element_located((By.ID, "jstree_demo_div")))
             except TimeoutException:
                 print("Решите капчу")
@@ -264,8 +289,8 @@ try:
                     parse_table(name_file, driver.page_source, choice_input)
                 else:
                     choices[choice].click()
+                    wait = WebDriverWait(driver, TIME_WAIT)
                     try:
-                        wait = WebDriverWait(driver, TIME_WAIT)
                         wait.until(
                             EC.presence_of_element_located((By.ID, "jstree_demo_div"))
                         )
