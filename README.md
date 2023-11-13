@@ -16,11 +16,15 @@ python -m venv venv
 ```bash
 git clone https://github.com/LYAKAKOY/sbercom_center_parser.git
 ```
-5. Установить все зависимости
+4. Перейти в папку sbercom_center_parser
+```bash
+cd sbercom_center_parser
+```
+6. Установить все зависимости
 ```bash
 pip install -r requirements.txt
 ```
-6 Запуск программы
+7 Запуск программы
 ```bash
 python main.py
 ```
