@@ -14,7 +14,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 TIME_WAIT = 10
-
+TIME_WAIT_CAPTCHA = 60
 
 def parse_table(
     file_name: str, html_content: str, mode_show: int, write: int = 1
@@ -71,7 +71,9 @@ try:
     try:
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "menu_item_li")))
     except TimeoutException:
+        wait = WebDriverWait(driver, TIME_WAIT_CAPTCHA)
         print("Решите капчу")
+        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "menu_item_li")))
 
     menu_items = driver.find_elements(By.CLASS_NAME, "menu_item_li")
     menu_items[2].click()
@@ -80,7 +82,9 @@ try:
     try:
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "popup_menu_item")))
     except TimeoutException:
+        wait = WebDriverWait(driver, TIME_WAIT_CAPTCHA)
         print("Решите капчу")
+        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "popup_menu_item")))
 
     regions = driver.find_element(By.TAG_NAME, "select").find_elements(
         By.TAG_NAME, "option"
@@ -102,7 +106,11 @@ try:
             EC.presence_of_element_located((By.ID, "horizontal-multilevel-menu"))
         )
     except TimeoutException:
+        wait = WebDriverWait(driver, TIME_WAIT_CAPTCHA)
         print("Решите капчу")
+        wait.until(
+            EC.presence_of_element_located((By.ID, "horizontal-multilevel-menu"))
+        )
 
     menu_items = driver.find_elements(By.TAG_NAME, "li")
     menu_items[1].click()
@@ -111,7 +119,9 @@ try:
     try:
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "border")))
     except TimeoutException:
+        wait = WebDriverWait(driver, TIME_WAIT_CAPTCHA)
         print("Решите капчу")
+        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "border")))
 
     left_blocks = driver.find_elements(By.CLASS_NAME, "border")
     for block in left_blocks:
@@ -124,7 +134,9 @@ try:
             try:
                 wait.until(EC.presence_of_element_located((By.ID, "close_filters")))
             except TimeoutException:
+                wait = WebDriverWait(driver, TIME_WAIT_CAPTCHA)
                 print("Решите капчу")
+                wait.until(EC.presence_of_element_located((By.ID, "close_filters")))
 
             show_filter = driver.find_element(By.ID, "close_filters")
             show_filter.click()
@@ -133,7 +145,9 @@ try:
             try:
                 wait.until(EC.presence_of_element_located((By.ID, "start_date")))
             except TimeoutException:
+                wait = WebDriverWait(driver, TIME_WAIT_CAPTCHA)
                 print("Решите капчу")
+                wait.until(EC.presence_of_element_located((By.ID, "start_date")))
 
             start_date = input("Введите начальную дату: ")
             input_start_date = driver.find_element(By.ID, "start_date")
@@ -175,7 +189,11 @@ try:
                     EC.presence_of_element_located((By.CLASS_NAME, "list-group-item"))
                 )
             except TimeoutException:
+                wait = WebDriverWait(driver, TIME_WAIT_CAPTCHA)
                 print("Решите капчу")
+                wait.until(
+                    EC.presence_of_element_located((By.CLASS_NAME, "list-group-item"))
+                )
 
             results = driver.find_elements(By.CLASS_NAME, "list-group-item")
 
@@ -223,7 +241,11 @@ try:
                     EC.presence_of_element_located((By.ID, "election-results-name"))
                 )
             except TimeoutException:
+                wait = WebDriverWait(driver, TIME_WAIT_CAPTCHA)
                 print("Решите капчу")
+                wait.until(
+                    EC.presence_of_element_located((By.ID, "election-results-name"))
+                )
 
             election_results = driver.find_element(By.ID, "election-results-name")
             election_results.click()
@@ -236,7 +258,13 @@ try:
                     )
                 )
             except TimeoutException:
+                wait = WebDriverWait(driver, TIME_WAIT_CAPTCHA)
                 print("Решите капчу")
+                wait.until(
+                    EC.presence_of_element_located(
+                        (By.CSS_SELECTOR, ".nav-link.active.show")
+                    )
+                )
 
             content = BeautifulSoup(driver.page_source, "html.parser")
             all_tbody = content.find_all("tbody")
@@ -256,7 +284,9 @@ try:
             try:
                 wait.until(EC.presence_of_element_located((By.ID, "jstree_demo_div")))
             except TimeoutException:
+                wait = WebDriverWait(driver, TIME_WAIT_CAPTCHA)
                 print("Решите капчу")
+                wait.until(EC.presence_of_element_located((By.ID, "jstree_demo_div")))
 
             selected_item = driver.find_element(By.CLASS_NAME, "selected-li")
             choices: Dict[int, WebElement] = {}
@@ -295,7 +325,11 @@ try:
                             EC.presence_of_element_located((By.ID, "jstree_demo_div"))
                         )
                     except TimeoutException:
+                        wait = WebDriverWait(driver, TIME_WAIT_CAPTCHA)
                         print("Решите капчу")
+                        wait.until(
+                            EC.presence_of_element_located((By.ID, "jstree_demo_div"))
+                        )
                     soup = BeautifulSoup(driver.page_source, "html.parser")
                     selected_li = (
                         soup.find(class_="selected-li")
